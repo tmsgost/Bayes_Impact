@@ -1,13 +1,24 @@
-<html>
+{% extends "base.html" %}
 
-<head>
+{% block head_extra %}
 <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
-</head>
+{% endblock %}
 
-<body>
-<div id="map" style="width: 1000px; height: 500px;"></div>
-
-
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+        <h1>A Look at Mines in the USA</h1>
+        <p>
+            A project for the <a href="http://bayesimpact.org">Bayes Impact 2014 Hackathon</a>. We seek to analyze <a href="http://www.msha.gov/OpenGovernmentData/OGIMSHA.asp">Department of Labor open data about mines in the United States</a>.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <h2 class="page-header">Mine Locations</h2>
+        <div id="map"></div>
+    </div>
+</div>
 <script>
     var mapstyle = [{"featureType":"water","stylers":[{"color":"#021019"}]},{"featureType":"landscape","stylers":[{"color":"#08304b"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#0c4152"},{"lightness":5}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#0b434f"},{"lightness":25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#0b3d51"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#000000"},{"lightness":13}]},{"featureType":"transit","stylers":[{"color":"#146474"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#144b53"},{"lightness":14},{"weight":1.4}]}];
 
@@ -35,7 +46,4 @@
         })(marker, i));
     }
 </script>
-
-</body>
-
-</html>
+{% endblock %}

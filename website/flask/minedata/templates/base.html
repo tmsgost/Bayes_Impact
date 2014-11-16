@@ -1,35 +1,77 @@
 <html>
-<script type="text/javascript">
+<head>
+{% if title %}
+<title>{{ title }} - Mine Data</title>
+{% else %}
+<title>Mine Data</title>
+{% endif %}
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Hackathon project on mining data from Bayes Impact Hackathon 2014" />
+<link rel="stylesheet" type="text/css" href="/static/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="/static/custom.css"/>
 
-function drawMap() {
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-	var mapstyle = [{"featureType":"water","stylers":[{"color":"#021019"}]},{"featureType":"landscape","stylers":[{"color":"#08304b"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#0c4152"},{"lightness":5}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#0b434f"},{"lightness":25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#0b3d51"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#000000"},{"lightness":13}]},{"featureType":"transit","stylers":[{"color":"#146474"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#144b53"},{"lightness":14},{"weight":1.4}]}];
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 
-	var locations = {{ coords|tojson }};
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-	var map = new google.maps.Map(document.getElementById('map'), {
-	    zoom: 4,
-	    center: new google.maps.LatLng(41.850033, -87.6500523),
-	    mapTypeId: google.maps.MapTypeId.ROADMAP,
-	    styles: mapstyle
-	});
-	var infowindow = new google.maps.InfoWindow();
-	var marker, i;
-
-	for (i = 0; i < locations.length; i++) {
-	    marker = new google.maps.Marker({
-	        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-	        map: map
-	    });
-	    google.maps.event.addListener(marker, 'click', (function (marker, i) {
-	        return function () {
-	            infowindow.setContent(locations[i][0]);
-	            infowindow.open(map, marker);
-	        }
-	    })(marker, i));
-	}
-
-}
-
+    ga('create', 'UA-56795204-1', 'auto');
+    ga('send', 'pageview');
 </script>
+
+{% block head_extra %}{% endblock %}
+
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/" class="navbar-brand">Mine Data</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="/">Overview</a>
+            </li>
+            <li>
+              <a href="/mines/">Mines</a>
+            </li>
+            <li>
+              <a href="/analysis/">Analysis</a>
+            </li>
+            <li>
+              <a href="/about/">About This Project</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container" id="main">
+        {% block content %}{% endblock %}
+    </div>
+    <div class="container" id="footer">
+        <div class="row">
+            <div class="col-sm-12 text-muted">
+                This content is released under the <a href="https://github.com/tmsgost/Bayes_Impact/blob/master/LICENSE">MIT License</a>. Source code is available on <a href="https://github.com/tmsgost/Bayes_Imact"> Github</a>.
+            </div>
+        </div>
+    </div>
+</body>
 </html>
+

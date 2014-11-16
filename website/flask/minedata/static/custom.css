@@ -1,0 +1,11 @@
+#main {
+    margin-top: 50px;
+}
+#map {
+    width: 100%;
+    max-width: 100%;
+    min-height: 500px;
+}
+#footer {
+    margin-top: 80px;
+}
