@@ -61,10 +61,7 @@ function getValue() {
     current_mine_status['Temporarily Idled'] = 0.03258712;
     multiple_pits = -7.253592;
     avg_employee_cnt = 0.1138435;
-    console.log(operator);
 
-    console.log(thisoperator);
-    console.log(operator[thisoperator]);
-    console.log(operator.thisoperator);
-    return intercept + operator.thisoperator + controller.thiscontroller + current_mine_type.thistype + primary_canvass_cd.thiscanvass + current_mine_status.thisstatus + avg_employee_cnt * thisemployees + multiple_pits * thispits;
+
+    return intercept + operator[thisoperator] + controller[thiscontroller] + primary_canvass_cd[thiscanvas] + current_mine_status[thisstatus] + avg_employee_cnt * thisemployees + multiple_pits * thispits;
 }
