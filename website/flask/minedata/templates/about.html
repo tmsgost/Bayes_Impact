@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+        <h1 class="page-header">About</h1>
+        <p><a href="/">MineData.org</a> was developed at the inaugural <a href="http://bayesimpact.org">Bayes Impact hackathon</a> with the goal of exploring publicly-availble <a href="http://www.msha.gov/OpenGovernmentData/OGIMSHA.asp">data about mines in the United States</a> from the Department of Labor.</p>
+        <p>We picked this data set because of recent events involving accidents and regulation in the mining industry. Being able to objectively identify mines that are at-risk for accidents means that inspection efforts can be more effectively targeted to improve safety.</p>
+
+        <h3 class="page-header">Team Members</h3>
+        <img id="team-photo" src="/static/team.jpg"/>
+        <ul>
+            <li><a href="">Chris Dorros</a>, OpenDNS</li>
+            <li><a href="https://www.philipithomas.com">Philip Thomas</a>, OpenDNS</li>
+            <li><a href="">Thomas Matthew</a>, OpenDNS</li>
+            <li><a href="">Zichong Kao</a>, Quora</li>
+        </ul>
+
+        <h3 class="page-header">Source</h3>
+        <p>
+            Source code for the model and website are <a href="https://github.com/tmsgost/Bayes_Impact">available on Github</a> under an <a href="https://github.com/tmsgost/Bayes_Impact/blob/master/LICENSE">MIT License</a>.
+        </p>
+    </div>
+</div>
+
+{% endblock %}

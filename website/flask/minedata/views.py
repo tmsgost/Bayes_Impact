@@ -14,6 +14,10 @@ def index():
 	
 	return render_template('index.html',coords=coords)
 
+@app.route("/about/")
+def about():
+	return render_template('about.html')
+
 """
 utf8 errors - need to fix later...
 @app.route("/mines/", methods=['GET'])

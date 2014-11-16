@@ -9,3 +9,8 @@
 #footer {
     margin-top: 80px;
 }
+
+#team-photo {
+    display: block;
+    margin: 20px auto;
+}
