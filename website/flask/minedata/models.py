@@ -1,6 +1,6 @@
 
-
-DATASET="/Users/cdorros/Documents/Hackathons/BayesImpact/MineDataSets-local"
+#temporary until we get a DB up
+DATASET="minedata/data"
 
 def parseCoords():
 	fin = open( DATASET + '/Mines.head','r' )
