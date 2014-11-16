@@ -29,6 +29,18 @@ def mineMineData():
 
 	return mineData
 
+# loads mine data into memory (active mines, with LAR scores)
+def mineActiveMineData():
+	# load base mine data
+	fin = open( DATASET + '/Mines.active.withLAR','r' )
+	mineData = []
+	reader = csv.DictReader(fin, delimiter="|", quotechar='"')
+	for row in reader:
+		mineData.append(row)
+
+	return mineData
+
+
 def mineViolationScores():
 	# load violation scores
 	fin = open( DATASET + '/violationscore.csv','r' )
@@ -37,6 +49,33 @@ def mineViolationScores():
 	for row in reader:
 		violationScores.append(row)
 	return violationScores
+
+def mineLivesAtRisk():
+	# load lives at risk scores
+	fin = open( DATASET + '/lives_at_risk_data_table.csv','r' )
+	larScores = []
+	reader = csv.DictReader(fin, delimiter=",")
+	for row in reader:
+		larScores.append(row)
+	
+	return larScores
+	"""
+	newMineList = []
+	
+
+	#i=0
+	for m2 in getActiveMines():
+		#print i
+		for m1 in larScores:
+			if int(m1["MINE_ID"]) == int(m2["MINE_ID"]):
+				#print int(m1["MINE_ID"])
+				#print int(m2["MINE_ID"])
+				m2["total_LAV_score"] = m1["total_LAV_score"]
+				#print m2
+		newMineList.append(m1)
+		#i = i+1
+	return newMineList
+	"""
 
 def mineAccidentData():
 	# 100MB file size limit for github, so just splitting into 2 for now...
@@ -125,11 +164,16 @@ def getFatalAccidents(accidentList):
 	return fatalityList
 
 def getActiveMines():
+	
 	mineList = []
 	for mine in getMines():
 		if mine["CURRENT_MINE_STATUS"] == "Active":
 			mineList.append(mine)
 	return mineList
+	
+	# pulling from pre-computed file to speed up
+	# this contains LAV scores as well
+	#return flask.g["activeMineData"]
 
 def getMine(mineID):
 	try:
@@ -149,6 +193,15 @@ def getMineCoords(mineList):
 			coord = [mine["MINE_ID"], mine["LATITUDE"], "-"+mine["LONGITUDE"], mine["CURRENT_MINE_NAME"]]
 			coords.append(coord)
 	return coords
+
+# return total Lives at Risk score for a given mine ID (as float)
+def getLARScore(mineID):
+	try:
+		for mine in flask.g["mineLivesAtRisk"]:
+			if int(mine["MINE_ID"]) == int(mineID):
+				return float(mine["total_LAV_score"])
+	except:
+		return None
 
 # returns a list of mines equal to or greater than a threshold
 def getMinesByViolationScore(violationScore):

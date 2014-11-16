@@ -62,7 +62,14 @@ def mine(mineID):
     coord = None
     if mine["LATITUDE"] != "" and mine["LONGITUDE"] != "":
         coord = [mine["MINE_ID"], mine["LATITUDE"], "-"+mine["LONGITUDE"], mine["CURRENT_MINE_NAME"]]
-    return render_template('mine.html', mine=mine, coord=coord)
+    
+    LARScore = models.getLARScore(mineID)
+    if not LARScore:
+    	LARScore = 'No "Lives at Risk" Score Calculated'
+    else:
+    	LARScore = str(LARScore)
+
+    return render_template('mine.html', mine=mine, coord=coord, LARScore=LARScore)
 
 @app.route("/mines/coords", methods=['GET'])
 def mineCoords():
