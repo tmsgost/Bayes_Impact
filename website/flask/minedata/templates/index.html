@@ -9,7 +9,6 @@
 {% block content %}
 <div class="row">
     <div class="col-sm-12">
-
         <h1 class="whoa">There are <strong class="text-info">{{numMines}}</strong> active mines in the United States.</h1>
         <div id="map"></div>
 
@@ -46,10 +45,14 @@
 
         
         <h1 class="whoa">We are using <strong class="text-primary">data</strong> to predict at-risk mines . . . </h1>
+        <div class="center">
+            <a href="http://dol.gov"><img src="/static/dol.png" alt="Department of Labor" class="home-logo" height="150"/></a>
+            <a href="http://data.gov"><img src="/static/datagov.png" alt="Data.gov" class="home-logo"/></a>
+        </div>
         <h1 class="whoa">. . . so that we can <strong class="text-success">better target safety inspections</strong> and <strong class="text-success">save lives</strong>.</h1>
 
             <div class="center">
-                <a class="btn btn-primary btn-large strong" href="/model/"><h1>View the Analysis</h1></a>
+                <a class="btn btn-primary btn-large strong" href="/analysis/"><h1>Analysis</h1></a>
             </div>
     </div>
 </div>

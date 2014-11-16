@@ -33,3 +33,7 @@ p.h3, p.h4 {
 .dark-text {
     color: white;
 }
+
+.home-logo {
+    padding: 15px;
+}
