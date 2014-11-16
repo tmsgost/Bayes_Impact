@@ -30,6 +30,10 @@ def index():
 def about():
 	return render_template('about.html')
 
+@app.route("/analysis/")
+def analysis():
+	return render_template('analysis.html')
+
 @app.route("/mines/")
 def mines():
         # TODO - drop in mines
