@@ -1,11 +1,9 @@
-Bayes_Impact
-============
+# Mine Data
 
-For the BI hackathon
+See the data at [MineData.org](http://www.minedata.org)
 
-Dataset located in /opt/minedataset on server. Make sure you have this setup for local dev:
-```
-sudo mkdir /opt/minedataset
-sudo chown `whoami` /opt/minedataset
-scp minedata.org:/opt/minedataset/* /opt/minedataset/
-```
+Our submission for the Bayes Impact Hackathon, 2014
+
+http://www.bayesimpact.org/hack
+
+Data is located in the public Amazon S3 bucket `analysis.minedata.org`. To use the web server, place data in `/opt/minedataset/`
