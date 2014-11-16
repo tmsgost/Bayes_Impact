@@ -7,5 +7,12 @@ $(document).ready(function(){
 });
 
 function getValue() {
-    return 9;
+    var operator = $("#operator").val();
+    var controller = $("#controller").val();
+    var type = $("#type").val();
+    var status = $("#status").val();
+    var pits = $("#multiple-pits").is(':checked');
+    var employees = $("#employees").val();
+
+    return "err";
 }
