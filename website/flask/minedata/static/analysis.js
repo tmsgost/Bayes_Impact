@@ -9,7 +9,7 @@ $(document).ready(function(){
 function getValue() {
     var thisoperator = $("#operator").val();
     var thiscontroller = $("#controller").val();
-    var thistype = $("#type").val();
+    var thistype = $('input[name="type"]:checked').val();
     var thisstatus = $("#status").val();
     var thispits = $("#multiple-pits").is(':checked') ? 1 : 0;
     var thiscanvas = $("#canvas").val();
@@ -63,5 +63,7 @@ function getValue() {
     avg_employee_cnt = 0.1138435;
 
 
-    return intercept + operator[thisoperator] + controller[thiscontroller] + primary_canvass_cd[thiscanvas] + current_mine_status[thisstatus] + avg_employee_cnt * thisemployees + multiple_pits * thispits;
+    var score = intercept + current_mine_type[thistype] + operator[thisoperator] + controller[thiscontroller] + primary_canvass_cd[thiscanvas] + current_mine_status[thisstatus] + avg_employee_cnt * thisemployees + multiple_pits * thispits;
+    score = score.toFixed(2);
+    return score;
 }
