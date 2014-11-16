@@ -1,35 +1,37 @@
 <html>
-<script type="text/javascript">
+<head>
+{% if title %}
+<title>{{ title }} - Mine Data</title>
+{% else %}
+<title>Mine Data</title>
+{% endif %}
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Hackathon project on mining data from Bayes Impact Hackathon 2014" />
+<link rel="stylesheet" type="text/css" href="/static/bootstrap.css"/>
 
-function drawMap() {
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 
-	var mapstyle = [{"featureType":"water","stylers":[{"color":"#021019"}]},{"featureType":"landscape","stylers":[{"color":"#08304b"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#0c4152"},{"lightness":5}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#0b434f"},{"lightness":25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#0b3d51"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#000000"},{"lightness":13}]},{"featureType":"transit","stylers":[{"color":"#146474"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#144b53"},{"lightness":14},{"weight":1.4}]}];
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-	var locations = {{ coords|tojson }};
-
-	var map = new google.maps.Map(document.getElementById('map'), {
-	    zoom: 4,
-	    center: new google.maps.LatLng(41.850033, -87.6500523),
-	    mapTypeId: google.maps.MapTypeId.ROADMAP,
-	    styles: mapstyle
-	});
-	var infowindow = new google.maps.InfoWindow();
-	var marker, i;
-
-	for (i = 0; i < locations.length; i++) {
-	    marker = new google.maps.Marker({
-	        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-	        map: map
-	    });
-	    google.maps.event.addListener(marker, 'click', (function (marker, i) {
-	        return function () {
-	            infowindow.setContent(locations[i][0]);
-	            infowindow.open(map, marker);
-	        }
-	    })(marker, i));
-	}
-
-}
-
+    ga('create', 'UA-56795204-1', 'auto');
+    ga('send', 'pageview');
 </script>
+
+{% block head_extra %}{% endblock %}
+
+</head>
+<body>
+{% block content %}{% endblock %}
+</body>
 </html>
+
