@@ -1,10 +1,101 @@
 {% extends "base.html" %}
 
+{% block head_extra %}
+<script src="/static/analysis.js" type="text/javascript"></script>
+{% endblock %}
+
 {% block content %}
 <div class="row">
     <div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <h1 class="page-header">US Mine Data Analysis</h1>
         The Lives-At-Risk metric estimates the number of lives that each mine has put at risk. It is a sum of two components: 1) accidents and 2) safety violations. Each incident is weighted according to its severity to the worker, number of workers impacted, and the likelihood of happening, as assessed by the Mine Safety and Health Administration (MSHA) inspectors.
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+        <h1 class="page-header">Generate a Score</h1>
+            <div class="well bs-component">
+              <form class="form-horizontal">
+                <fieldset>
+                  <legend>Risk Score Calculator</legend>
+                  <div class="form-group">
+                    <label for="select" class="col-lg-2 control-label">Operator</label>
+                    <div class="col-lg-10">
+                      <select class="form-control" id="operator">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="select" class="col-lg-2 control-label">Controller</label>
+                    <div class="col-lg-10">
+                      <select class="form-control" id="operator">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">Radios</label>
+                    <div class="col-lg-10">
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="type" id="type" value="surface" checked="">
+                          Surface
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="type" id="type" value="underground">
+                          Underground
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="select" class="col-lg-2 control-label">Current Mine Status</label>
+                    <div class="col-lg-10">
+                      <select class="form-control" id="operator">
+                        <option value="Abandoned and Sealed">Active</option>
+                        <option value="Intermittent">Intermittant</option>
+                        <option value="New Mine">New Mine</option>
+                        <option value="NonProducing">NonProducing</option>
+                        <option value="Temporarily Idled">Temporarily Idled</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="checkbox" class="col-lg-2 control-label">Multiple Pits</label>
+                    <div class="col-lg-10">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox">
+                        </label>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="employees" class="col-lg-2 control-label">Employees</label>
+                    <div class="col-lg-10">
+                          <input type="text" class="form-control" id="employees" value="1000"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <button type="submit" class="btn btn-primary">Calculate</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+          </div>
     </div>
 </div>
 {% endblock %}
