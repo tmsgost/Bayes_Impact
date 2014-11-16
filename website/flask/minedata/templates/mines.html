@@ -16,9 +16,19 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- for mine in mines -->
+                {% for mine in mines %}
                 <tr>
-
+                    <td>
+                        <a href="/mines/{{ mine["MINE_ID"] }}">{{mine["CURRENT_MINE_NAME"]}}</a>
+                    </td>
+                    <td>{{ mine["NO_EMPLOYEES"] }}</td>
+                    <td>{{ mine["NEAREST_TOWN"] }}</td>
+                    <td>{{ mine["STATE"] }}</td>
+                    <td>{{mine["CURRENT_CONTROLLER_NAME"]}}</td>
+                    <td><a class="btn btn-info btn-xs" href="/mines/{{ mine["MINE_ID"] }}">Info</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
 </div>
