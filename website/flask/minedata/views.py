@@ -25,7 +25,8 @@ def about():
 @app.route("/mines/")
 def mines():
         # TODO - drop in mines
-	return render_template('mines.html')
+	mines = models.getActiveMines()
+	return render_template('mines.html', mines=mines)
 
 """
 utf8 errors - need to fix later...
