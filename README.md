@@ -1,11 +1,5 @@
-Bayes_Impact
-============
+http://www.minedata.org
 
-For the BI hackathon
+Our submission for the Bayes Impact Hackathon, 2014
 
-Dataset located in /opt/minedataset on server. Make sure you have this setup for local dev:
-```
-sudo mkdir /opt/minedataset
-sudo chown `whoami` /opt/minedataset
-scp minedata.org:/opt/minedataset/* /opt/minedataset/
-```
+http://www.bayesimpact.org/hack
