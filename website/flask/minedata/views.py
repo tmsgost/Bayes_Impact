@@ -52,12 +52,13 @@ def mines():
 
 @app.route("/mines/<int:mineID>", methods=['GET'])
 def mine(mineID):
-	if request.method == 'GET':
-		mine = models.getMine(mineID)
-		if mine is None:
-			return "Mine not found"
-		else:
-			return json.dumps(mine)
+    mine = models.getMine(mineID)
+    if mine is None:
+            return "Mine not found"
+    coord = None
+    if mine["LATITUDE"] != "" and mine["LONGITUDE"] != "":
+        coord = [mine["MINE_ID"], mine["LATITUDE"], "-"+mine["LONGITUDE"], mine["CURRENT_MINE_NAME"]]
+    return render_template('mine.html', mine=mine, coord=coord)
 
 @app.route("/mines/coords", methods=['GET'])
 def mineCoords():
