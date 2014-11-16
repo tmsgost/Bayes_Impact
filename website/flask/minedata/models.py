@@ -4,7 +4,6 @@ from flask import g
 
 DATASET="minedata/data"
 
-
 def parseCoords():
 	fin = open( DATASET + '/Mines.head','r' )
 	fin.readline() # throw away header
@@ -18,9 +17,9 @@ def parseCoords():
 		coords.append(coord)
 	return coords
 
-
 # loads mine data into memory
 def mineMineData():
+	# load base mine data
 	fin = open( DATASET + '/Mines.txt','r' )
 	mineData = []
 	reader = csv.DictReader(fin, delimiter="|", quotechar='"')
@@ -29,29 +28,50 @@ def mineMineData():
 
 	return mineData
 
+def mineViolationScores():
+	# load violation scores
+	fin = open( DATASET + '/violationscore.csv','r' )
+	violationScores = []
+	reader = csv.DictReader(fin, delimiter=",")
+	for row in reader:
+		violationScores.append(row)
+	return violationScores
+
+# get all violation scores (for now)
+def getViolationScores():
+	return flask.g["violationScores"]
+
 # retruns all the mines
 def getMines():
 	return flask.g["mineData"]
 	
 def getMine(mineID):
-	#mineData = mineMineData()
-	#return str(mineID)
-	
 	try:
-		
 		for mine in flask.g["mineData"]:
 			if int(mine["MINE_ID"]) == int(mineID):
-				print "FOUND"
 				return mine
 	except:
 		return None
 
-
-# returns a json blob of all the coordinates of all mines in the US
-def getMineCoords():
+# given a list of mines (entire mine objects), return the coordinates in form:
+# MINE_ID, LATITUDE, LONGITUDE, CURRENT_MINE_NAME
+def getMineCoords(mineList):
 	coords = []
-	for mine in flask.g["mineData"]:
+	#for mine in flask.g["mineData"]:
+	for mine in mineList:
 		if mine["LATITUDE"] != "" and mine["LONGITUDE"] != "":
-			coord = [mine["MINE_ID"], mine["LATITUDE"], mine["LONGITUDE"]]
+			coord = [mine["MINE_ID"], mine["LATITUDE"], "-"+mine["LONGITUDE"], mine["CURRENT_MINE_NAME"]]
 			coords.append(coord)
 	return coords
+
+# returns a list of mines equal to or greater than a threshold
+def getMinesByViolationScore(violationScore):
+	mineList = []
+	for mine in flask.g["violationScores"]:
+		try:
+			if float(mine["score"]) >= int(violationScore):
+				mineList.append( getMine(mine["MINE_ID"]) )
+		except:
+			pass
+
+	return mineList

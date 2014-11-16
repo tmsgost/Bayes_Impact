@@ -4,8 +4,15 @@ import models
 
 @app.route("/")
 def index():
-	#url_for('static', filename='maps.js')
-	return render_template('index.html',coords=models.parseCoords())
+	
+	# ALL MINES
+	mines = models.getMines()
+	coords = models.getMineCoords(mines)
+
+	# MINES WITH VIOLATION SCORE >= 6000
+	#coords = models.getMineCoords( models.getMinesByViolationScore("6000") )
+	
+	return render_template('index.html',coords=coords)
 
 """
 utf8 errors - need to fix later...
@@ -32,5 +39,19 @@ def mine(mineID):
 
 @app.route("/mines/coords", methods=['GET'])
 def mineCoords():
-	#return models.getMineCoords()
 	return json.dumps(models.getMineCoords())
+
+@app.route("/mines/scores", methods=['GET'])
+def violationScores():
+	return json.dumps(models.getViolationScores())
+
+# show mines more dangerous than threshold
+@app.route("/mines/scores/<int:violationScoreThreshold>", methods=['GET'])
+def violationScoreQuery(violationScoreThreshold):
+	if request.method == 'GET':
+		
+		# restrict threshold
+		if violationScoreThreshold < 1000:
+			return "Threshold too small"
+
+		return json.dumps( models.getMinesByViolationScore(violationScoreThreshold) )

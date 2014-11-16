@@ -40,7 +40,8 @@
         });
         google.maps.event.addListener(marker, 'click', (function (marker, i) {
             return function () {
-                infowindow.setContent(locations[i][0]);
+                content = '<a href="/mines/' + locations[i][0] + '">' + locations[i][3] + '</a>'
+                infowindow.setContent(content);
                 infowindow.open(map, marker);
             }
         })(marker, i));
