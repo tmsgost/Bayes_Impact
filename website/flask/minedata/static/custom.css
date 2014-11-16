@@ -14,3 +14,14 @@
     display: block;
     margin: 20px auto;
 }
+
+.center {
+    display: block;
+    text-align: center;
+}
+
+.whoa {
+    display: block;
+    text-align: center;
+    padding: 30px 0;
+}
