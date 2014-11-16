@@ -7,6 +7,10 @@ def index():
 	#url_for('static', filename='maps.js')
 	return render_template('index.html',coords=models.parseCoords())
 
+@app.route("/about/")
+def about():
+	return render_template('about.html')
+
 """
 utf8 errors - need to fix later...
 @app.route("/mines/", methods=['GET'])
