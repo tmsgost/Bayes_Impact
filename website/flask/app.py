@@ -1,3 +1,3 @@
-from minedata import app
+from minedata import app, models
 if __name__ == "__main__":
-    app.run(debug=True)
+	app.run(debug=True)
