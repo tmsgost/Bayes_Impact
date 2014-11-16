@@ -10,16 +10,22 @@ def index():
 
 	# ACTIVE MINES
 	mines = models.getActiveMines()
+        numMines = len(mines)
 
 	# MINES WITH VIOLATION SCORE >= 6000
 	#mines = models.getMinesByViolationScore("6000")
 
 	coords = models.getMineCoords(mines)
-	return render_template('index.html',coords=coords)
+	return render_template('index.html',coords=coords, numMines=numMines)
 
 @app.route("/about/")
 def about():
 	return render_template('about.html')
+
+@app.route("/mines/")
+def mines():
+        # TODO - drop in mines
+	return render_template('mines.html')
 
 """
 utf8 errors - need to fix later...
