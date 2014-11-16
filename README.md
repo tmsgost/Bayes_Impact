@@ -1,4 +1,6 @@
-http://www.minedata.org
+# Mine Data
+
+See the data at [MineData.org](http://www.minedata.org)
 
 Our submission for the Bayes Impact Hackathon, 2014
 
