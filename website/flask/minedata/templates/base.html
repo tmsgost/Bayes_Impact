@@ -11,8 +11,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Hackathon project on mining data from Bayes Impact Hackathon 2014" />
 <link rel="stylesheet" type="text/css" href="/static/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="/static/custom.css"/>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
 <!--[if lt IE 9]>
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
@@ -31,7 +34,37 @@
 
 </head>
 <body>
-{% block content %}{% endblock %}
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/" class="navbar-brand">Mine Data</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="/">Overview</a>
+            </li>
+            <li>
+              <a href="/mines/">Mines</a>
+            </li>
+            <li>
+              <a href="/analysis/">Analysis</a>
+            </li>
+            <li>
+              <a href="/about/">About This Project</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container" id="main">
+        {% block content %}{% endblock %}
+    </div>
 </body>
 </html>
 
