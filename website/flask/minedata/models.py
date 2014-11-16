@@ -2,7 +2,8 @@ import csv
 import flask
 from flask import g
 
-DATASET="minedata/data"
+#DATASET="minedata/data"
+DATASET="/opt/minedataset"
 
 def parseCoords():
 	fin = open( DATASET + '/Mines.head','r' )
@@ -37,6 +38,40 @@ def mineViolationScores():
 		violationScores.append(row)
 	return violationScores
 
+def mineAccidentData():
+	# 100MB file size limit for github, so just splitting into 2 for now...
+	accidentData = []
+
+	fin = open( DATASET + '/Accidents.txt','r' )
+	reader = csv.DictReader(fin, delimiter="|", quotechar='"')
+	for row in reader:
+		accidentData.append(row)
+
+	"""
+	fin = open( DATASET + '/Accidents.txt.1','r' )
+	reader = csv.DictReader(fin, delimiter="|", quotechar='"')
+	for row in reader:
+		accidentData.append(row)
+
+	fin = open( DATASET + '/Accidents.txt.2','r' )
+	reader = csv.DictReader(fin, delimiter="|", quotechar='"')
+	for row in reader:
+		accidentData.append(row)
+	"""
+
+	return accidentData
+
+# currently only reading in violation data for 2013 as dataset is too large...
+def mineViolationData():
+	#fin = open( DATASET + '/Violations.txt','r' )
+	fin = open( DATASET + '/Violations.2013','r' )
+	violationData = []
+	reader = csv.DictReader(fin, delimiter="|", quotechar='"')
+	for row in reader:
+		violationData.append(row)
+
+	return violationData
+
 # get all violation scores (for now)
 def getViolationScores():
 	return flask.g["violationScores"]
@@ -44,6 +79,50 @@ def getViolationScores():
 # returns all the mines
 def getMines():
 	return flask.g["mineData"]
+
+# returns all accidents
+def getAccidents():
+	return flask.g["accidentData"]
+
+# returns all violations
+def getViolations():
+	return flask.g["violationData"]
+
+# returns all the accidents for a given year range (inclusive)
+def getAccidentsForRange(startYear,endYear):
+	accidentList = []
+	for accident in getAccidents():
+		try:
+			if int(accident["CAL_YR"]) >= int(startYear) and int(accident["CAL_YR"]) <= int(endYear):
+				accidentList.append(accident)
+		except:
+			pass
+
+	return accidentList
+
+# returns all the violations for a given year range (inclusive)
+def getViolationsForRange(startYear,endYear):
+	violationList = []
+	for violation in getViolations():
+		try:
+			if int(violation["CAL_YR"]) >= int(startYear) and int(violation["CAL_YR"]) <= int(endYear):
+				violationList.append(violation)
+		except:
+			pass
+
+	return violationList
+
+# returns all accidents resulting in a fatality, given a list of accidents
+def getFatalAccidents(accidentList):
+	fatalityList = []
+	for accident in accidentList:
+		try:
+			if accident["DEGREE_INJURY"] == "FATALITY":
+				fatalityList.append(accident)
+		except:
+			pass
+
+	return fatalityList
 
 def getActiveMines():
 	mineList = []

@@ -15,8 +15,16 @@ def index():
 	# MINES WITH VIOLATION SCORE >= 6000
 	#mines = models.getMinesByViolationScore("6000")
 
+	numFatalities2013 = len(models.getFatalAccidents(
+			models.getAccidentsForRange(2013,2013) ))
+
+	numViolations2013 = len(models.getViolationsForRange(2013,2013))
+
+	#fout = open(writemodels.getViolations(models.getViolationsForRange(2013,2013)
+
 	coords = models.getMineCoords(mines)
-	return render_template('index.html',coords=coords, numMines=numMines)
+	return render_template('index.html',coords=coords, numMines=numMines,
+		numFatalities=numFatalities2013, numViolations=numViolations2013)
 
 @app.route("/about/")
 def about():
@@ -58,6 +66,20 @@ def mineCoords():
 @app.route("/mines/scores", methods=['GET'])
 def violationScores():
 	return json.dumps(models.getViolationScores())
+
+# print list of accidents for one year
+@app.route("/accidents/<int:year>", methods=['GET'])
+def accidentsByYear(year):
+	return json.dumps(models.getFatalAccidents(
+			models.getAccidentsForRange(year,year) ))
+
+# print list of violations for one year
+@app.route("/violations/<int:year>", methods=['GET'])
+def violationsByYear(year):
+	# only 2013 for now since dataset is too large
+	if int(year) != 2013:
+		return "Only 2013 violation data is available"
+	return json.dumps(models.getViolationsForRange(int(year),int(year)))
 
 # show mines more dangerous than threshold
 @app.route("/mines/scores/<int:violationScoreThreshold>", methods=['GET'])
