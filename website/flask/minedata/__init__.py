@@ -6,7 +6,7 @@ import views,models
 print "loading Mine Data"
 flask.g = {}
 flask.g["mineData"] = models.mineMineData()
-flask.g["activeMineData"] = models.mineActiveMineData()
+#flask.g["activeMineData"] = models.mineActiveMineData()
 
 print "loading Violation Score Data"
 flask.g["violationScores"] = models.mineViolationScores()

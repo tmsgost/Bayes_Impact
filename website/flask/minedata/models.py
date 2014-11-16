@@ -29,6 +29,7 @@ def mineMineData():
 
 	return mineData
 
+"""
 # loads mine data into memory (active mines, with LAR scores)
 def mineActiveMineData():
 	# load base mine data
@@ -39,7 +40,7 @@ def mineActiveMineData():
 		mineData.append(row)
 
 	return mineData
-
+"""
 
 def mineViolationScores():
 	# load violation scores
