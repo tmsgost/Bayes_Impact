@@ -21,6 +21,11 @@ def index():
 def about():
 	return render_template('about.html')
 
+@app.route("/mines/")
+def mines():
+        # TODO - drop in mines
+	return render_template('mines.html')
+
 """
 utf8 errors - need to fix later...
 @app.route("/mines/", methods=['GET'])
