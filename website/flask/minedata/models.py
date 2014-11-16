@@ -140,6 +140,41 @@ def getAccidentsForRange(startYear,endYear):
 
 	return accidentList
 
+# get all accidents for a given mineID
+def getAccidentsForMine(mineID):
+	accidentList = []
+	for accident in getAccidents():
+		try:
+			if int(accident["MINE_ID"]) == int(mineID):
+				accidentList.append(accident)
+		except:
+			pass
+	return accidentList
+
+# get all violations for a given mineID
+def getViolationsForMine(mineID):
+	violationList = []
+	allViolations = getViolations()
+	for violation in allViolations:
+		try:
+			if int(violation["MINE_ID"]) == int(mineID):
+				violationList.append(violation)
+		except:
+			pass
+	return violationList	
+
+# get all deaths for a given mineID
+def getFatalAccidentsForMine(mineID):
+	deathList = []
+	accidents = getAccidentsForMine(mineID)
+	for accident in getFatalAccidents(accidents):
+		try:
+			if int(accident["MINE_ID"]) == int(mineID):
+				deathList.append(accident)
+		except:
+			pass
+	return deathList	
+
 # returns all the violations for a given year range (inclusive)
 def getViolationsForRange(startYear,endYear):
 	violationList = []

@@ -69,7 +69,13 @@ def mine(mineID):
     else:
     	LARScore = str(LARScore)
 
-    return render_template('mine.html', mine=mine, coord=coord, LARScore=LARScore)
+	fatalityCount = len(models.getFatalAccidentsForMine(mineID))
+	violationCount = len(models.getViolationsForMine(mineID))
+	accidentCount = len(models.getAccidentsForMine(mineID))
+
+    return render_template('mine.html', mine=mine, coord=coord,
+    	LARScore=LARScore, fatalityCount=fatalityCount,
+    	violationCount=violationCount, accidentCount=accidentCount  )
 
 @app.route("/mines/coords", methods=['GET'])
 def mineCoords():
