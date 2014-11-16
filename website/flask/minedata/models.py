@@ -41,10 +41,17 @@ def mineViolationScores():
 def getViolationScores():
 	return flask.g["violationScores"]
 
-# retruns all the mines
+# returns all the mines
 def getMines():
 	return flask.g["mineData"]
-	
+
+def getActiveMines():
+	mineList = []
+	for mine in getMines():
+		if mine["CURRENT_MINE_STATUS"] == "Active":
+			mineList.append(mine)
+	return mineList
+
 def getMine(mineID):
 	try:
 		for mine in flask.g["mineData"]:

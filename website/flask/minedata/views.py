@@ -6,12 +6,15 @@ import models
 def index():
 	
 	# ALL MINES
-	mines = models.getMines()
-	coords = models.getMineCoords(mines)
+	#mines = models.getMines()
+
+	# ACTIVE MINES
+	mines = models.getActiveMines()
 
 	# MINES WITH VIOLATION SCORE >= 6000
-	#coords = models.getMineCoords( models.getMinesByViolationScore("6000") )
-	
+	#mines = models.getMinesByViolationScore("6000")
+
+	coords = models.getMineCoords(mines)
 	return render_template('index.html',coords=coords)
 
 @app.route("/about/")
