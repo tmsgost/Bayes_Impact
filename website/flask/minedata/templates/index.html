@@ -2,6 +2,11 @@
 
 {% block head_extra %}
 <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+
+<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="data.js"></script>
+<script type="text/javascript" src="data.json"></script>
 {% endblock %}
 
 {% block content %}
@@ -37,11 +42,14 @@
     var infowindow = new google.maps.InfoWindow();
     var marker, i;
 
+    var markers = [];
+
     for (i = 0; i < locations.length; i++) {
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[i][1], locations[i][2]),
             map: map
         });
+
         google.maps.event.addListener(marker, 'click', (function (marker, i) {
             return function () {
                 content = '<a href="/mines/' + locations[i][0] + '">' + locations[i][3] + '</a>'
@@ -49,6 +57,12 @@
                 infowindow.open(map, marker);
             }
         })(marker, i));
+
+        markers.push(marker);
     }
+
+    var markerCluster = new MarkerClusterer(map, markers);
+
+
 </script>
 {% endblock %}
