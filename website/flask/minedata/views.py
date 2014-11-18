@@ -20,8 +20,6 @@ def index():
 
 	numViolations2013 = len(models.getViolationsForRange(2013,2013))
 
-	#fout = open(writemodels.getViolations(models.getViolationsForRange(2013,2013)
-
 	coords = models.getMineCoords(mines)
 	return render_template('index.html',coords=coords, numMines=numMines,
 		numFatalities=numFatalities2013, numViolations=numViolations2013)
